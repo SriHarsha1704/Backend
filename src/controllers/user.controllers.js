@@ -1,5 +1,5 @@
 import {asyncHandler} from '../utils/asyncHandler.js';
-import {User} from '../db/database.js';
+import User from '../models/user.model.js';
 import {ApiResponse as AR} from '../utils/ApiResponse.js';
 
 const Register = asyncHandler( async (req,res)=>
@@ -40,7 +40,7 @@ const Register = asyncHandler( async (req,res)=>
     {
         throw new ApiError(400,"First image is required");
     }   
-    const user= await User.create(
+    const user= await DB.create(
     {
         fullName,
         email,
