@@ -33,7 +33,7 @@ const Register = asyncHandler( async (req,res)=>
 
     const first= await uploadoncloudinary(avatar);   // uploads image to cloudinary and returns the url
     const second= await uploadoncloudinary(coverimage);  // awaits for the image to be uploaded before proceeding
-    if(first==false)
+    if(!first)
     {
         throw new ApiError(400,"First image is required");
     }   
@@ -50,11 +50,11 @@ const Register = asyncHandler( async (req,res)=>
         "-password -refreshToken"                              //select gets all the user details by ID and - indicates that feilds should not be selected on retriveing 
     )
 
-    if(createdUser==false){
+    if(!createdUser){
         throw new ApiError(500,"Internal Server Error");   // if no user found/created it throws error
     }
      return res.status(201).json(
-        new AR(200,createdUser,"User Registered Succesfully")  // returning the crested user message using ApiResponse class imported as AR which gives the response in PostMan
+        new AR(201,createdUser,"User Registered Succesfully")  // returning the crested user message using ApiResponse class imported as AR which gives the response in PostMan
      )
     
 })

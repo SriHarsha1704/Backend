@@ -47,7 +47,7 @@ UserSchema.pre("save",async function(next){   // pre describes the function befo
     {
         next();                                // indicates that it is done 
     }
-    this.password=await bcrypt,hash(this.password,10);   // if is modifies is false then it will hash the passwrod and encrypts it 
+    this.password= await bcrypt.hash(this.password,10);   // if is modifies is false then it will hash the passwrod and encrypts it 
     next();
 })
 
