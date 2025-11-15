@@ -6,11 +6,11 @@ import {upload} from '../middlewares/multer.middleware.js'; // imported from mid
 const Route = Router();
 
 Route.route("/registeruser").post(
-    uplaod.fields([                         //uploading a file 1. we have differnt ways to upload a file 
-       {name:"image",
+    upload.fields([                         //uploading a file 1. we have differnt ways to upload a file 
+       {name:"avatar",
         maxCount:1},                        // we store here what we need to upload
         //{2}                               // we store in form of objects
     ]),
-    Register);                              // gives the ontrollers message wheter satistfied or error
+    Register);                              // gives the controllers message wheter satistfied or error
 
-export default Route;
+export default Route;   

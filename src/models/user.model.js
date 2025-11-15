@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const UserSchema = new mongoose.Schema({
-    name :                                       // this is the name of the user gives the feild name
+    fullName :                                       // this is the name of the user gives the feild name
     {
         required : true,                          // these all describes the properties of the name feild
         type : String,
@@ -30,7 +30,7 @@ const UserSchema = new mongoose.Schema({
         required: false,
     },
     watchHistory:{
-        type:Schema.Types.ObjeectId,
+        type:Schema.Types.ObjectId,
         ref:"video"
     },
     refreshToken:{
@@ -47,7 +47,7 @@ UserSchema.pre("save",async function(next){   // pre describes the function befo
     {
         next();                                // indicates that it is done 
     }
-    this.password=await bcrypt(this.password,10);   // if is modifies is false then it will hash the passwrod and encrypts it 
+    this.password=await bcrypt,hash(this.password,10);   // if is modifies is false then it will hash the passwrod and encrypts it 
     next();
 })
 
@@ -58,19 +58,18 @@ UserSchema.methods.generateAccessToken=function()   // here we create function c
 {                                                   // here when the function is called it creates a token based on the HEADER.PAYLOAD.SIGNATURE with the help of SECRET_API_KEY
     return jwt.sign({                               // then we verify the generated token based on the user details with the secret access key if verified then it contiues
         _id:this._id,
-        email:this.email,
-        password:this.password          
+        email:this.email,          
 },
 process.env.ACCESS_TOKEN_SECRET,
-process.env.ACCESS_TOKEN_EXPIRY)                     // it has a specific time if expires then it does not allow 
+{expiresIn: process.env.ACCESS_TOKEN_EXPIRY})                     // it has a specific time if expires then it does not allow 
 }
 
-UserSchema.method.generateRefreshToken=function()    // this generates the refresh token which is used to generate the access token whenever expired 
+UserSchema.methods.generateRefreshToken=function()    // this generates the refresh token which is used to generate the access token whenever expired 
 {
     return jwt.sign({                                // just verifies with the generated token with the secret refresh token and generates new access token until expiry
         id:this._id
     },process.env.REFRESH_TOKEN_SECRET,
-        process.env.REFRESH_TOKEN_EXPIRY)            // after refresh token expiry then we need to login with creds again which follows the generation of new access tokne and same procedure with line:54
+        {expiresIn: process.env.REFRESH_TOKEN_EXPIRY})            // after refresh token expiry then we need to login with creds again which follows the generation of new access tokne and same procedure with line:54
 }
 const User=mongoose.model("User",UserSchema); //mongoose.model creates the schema into model User changes to users and UserSchema is the refernce 
 

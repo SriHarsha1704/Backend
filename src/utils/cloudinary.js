@@ -2,11 +2,11 @@ import {v2 as cloudinary} from 'cloudinary';
 import fs from 'fs';
 //we need to configure the cloudinary by using the cloudinary account and these name,api_key,api_secret
 cloudinary.config({
-    cloudname: process.env.CLOUDINARY_CLOUD_NAME,
-    cloudapikey: process.env.CLOUDINARY_API_KEY,
-    cloudapisecret: process.env.CLOUDINARY_API_SECRET
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 })
-const uploadOnCloudinary = async (localFilePath)=>{   //LocalFilePath takes the path of the file that is being uploaded 
+const uploadoncloudinary = async (localFilePath)=>{   //LocalFilePath takes the path of the file that is being uploaded 
     try{ 
         // if no path is identified error is generated 
         if(localFilePath==false)
@@ -28,4 +28,4 @@ const uploadOnCloudinary = async (localFilePath)=>{   //LocalFilePath takes the 
     }
     
 }
-export {uploadOnCloudinary}
+export {uploadoncloudinary}
