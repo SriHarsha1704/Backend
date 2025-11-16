@@ -26,11 +26,6 @@ const Register = asyncHandler( async (req,res)=>
 
    const avatar=req.files?.avatar[0]?.path;
    const coverimage=req.files?.coverimage[0]?.path; // takes the image from frontend and stores it in the db
-    if(!avatar)
-    {
-        throw new ApiError(400,"First image is required"); // if no image is provided throws error
-    }
-
     const first= await uploadoncloudinary(avatar);   // uploads image to cloudinary and returns the url
     const second= await uploadoncloudinary(coverimage);  // awaits for the image to be uploaded before proceeding
     if(!first)

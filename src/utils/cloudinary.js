@@ -9,7 +9,7 @@ cloudinary.config({
 const uploadoncloudinary = async (localFilePath)=>{   //LocalFilePath takes the path of the file that is being uploaded 
     try{ 
         // if no path is identified error is generated 
-        if(localFilePath)
+        if(!localFilePath)
         {
             return null;
         }

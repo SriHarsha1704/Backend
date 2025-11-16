@@ -3,7 +3,7 @@ import express from 'express';
 const  DB=async ()=>
 {
     try{
-          await mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`);
+          await mongoose.connect(`${process.env.MONGODB_URI}`);
           console.log("DATABASE CONNECTED");
     }
     catch(error)
