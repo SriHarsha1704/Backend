@@ -51,7 +51,7 @@ UserSchema.pre("save",async function(next){   // pre describes the function befo
     next();
 })
 
-UserSchema.methods.passwordcorrect=async function(password){  // UserSchema.methods is used to create the custom methods like a function
+UserSchema.methods.passwordCorrect=async function(password){  // UserSchema.methods is used to create the custom methods like a function
     return bcrypt.compare(password,this.password);  // bcypt.compare is used to compare the input password and this.password gives the hased password for that stored user
 }  
 UserSchema.methods.generateAccessToken=function()   // here we create function called generateAccessToken we call this from frontend when the details are given 
